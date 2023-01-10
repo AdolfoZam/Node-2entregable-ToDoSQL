@@ -5,6 +5,7 @@ const db = require("./utils/database");
 const initModels = require('./models/init.model');//imporatamos  initmodels para importar las tablascreadas
 const Users = require('./models/users.models');
 const Todos = require('./models/todos.models');
+const userRoutes = require('./routes/users.routes');
 const app = express();
 app.use(express.json());
 const PORT = 8000;
@@ -23,6 +24,8 @@ db.sync({force:false})//devulve una promesa y la mostramos por el then
 app.get('/',(req,res)=>{
     res.status(200).json({message:"Bienvenido al servidor"})
 });
+
+app.use('/api/v1',userRoutes);
 //definir las rutas de nustros endPoint (ep)
 //todas las consultas
 //localhost:8000/users  - todo para usuarios
