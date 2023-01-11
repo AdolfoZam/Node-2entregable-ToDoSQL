@@ -6,6 +6,7 @@ const initModels = require('./models/init.model');//imporatamos  initmodels para
 const Users = require('./models/users.models');
 const Todos = require('./models/todos.models');
 const userRoutes = require('./routes/users.routes');
+const todosRoutes = require('./routes/todos.routes');
 const app = express();
 app.use(express.json());
 const PORT = 8000;
@@ -24,8 +25,10 @@ db.sync({force:false})//devulve una promesa y la mostramos por el then
 app.get('/',(req,res)=>{
     res.status(200).json({message:"Bienvenido al servidor"})
 });
-
-app.use('/api/v1',userRoutes);
+//escucha todas las peticiones y las busca en user.routes a traves de userRoutes
+app.use('/api/v1',userRoutes);//lo pongo para poder mostrar todas las petuciones
+//escucha todas las peticiones a todos a traves de todosRoutes
+app.use('/api/v1', todosRoutes);//2 parametros
 //definir las rutas de nustros endPoint (ep)
 //todas las consultas
 //localhost:8000/users  - todo para usuarios
