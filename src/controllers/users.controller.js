@@ -1,18 +1,17 @@
-const Users = require('../models/users.models');
+// const Users = require('../models/users.models');
 const UserServices = require('../services/user.services');
 
 //consulta de los usuarios
-const getAllUsers = async(req,res)=>{
+const getAllUsers = async(req, res)=>{
     try{
 const result = await UserServices.getAll();
-res.status(200).json(result);
+        res.status(200).json(result);
     }catch(error){
-res.status(400).json(error.message);
+        res.status(400).json(error.message);
     }
-    res.json({message:'obteniendo todos los usuarios'})
-}
+ };
 //consulta de usuarios por id
-const getUserById = async(req,res)=>{
+const getUserById = async(req, res)=>{
     try {
         const {id} = req.params;
         const result = await UserServices.getById(id);
@@ -20,9 +19,10 @@ const getUserById = async(req,res)=>{
     }catch(error){
         res.status(400).json(error.message);
     }
+    
   }
 
-  const getUserWithTasks = async(req,res)=>{
+  const getUserWithTasks = async(req, res)=>{
     try{
         const {id} = req.params;
         const result = await UserServices.getWithTasks(id);
@@ -32,7 +32,7 @@ const getUserById = async(req,res)=>{
     }
   }
 //creacion de usuarios
-const createUser = async(req,res)=>{
+const createUser = async(req, res)=>{
     try{
         const newUser =req.body;
         const result = await UserServices.create(newUser);
@@ -40,31 +40,28 @@ const createUser = async(req,res)=>{
     }catch(error){
         res.status(400).json(error.message);
     }
+    
 }
 //actualizacion de usuarios
-const updateUser = async(req,res)=>{
+const updateUser = async(req, res)=>{
     try{
         const {id} = req.params;
         const field = req.body;
-        const result = await UserServices.update(field,{
-            where:{id},
-        });
+        const result = await UserServices.update(field,id);
         res.status(200).json(result);
     }catch(error){
         res.status(400).json(error.message);
     }
 }
 //elimando usuarios
-const deleteUser = async(req,res)=>{
-    // try{
-    //     const {id} = req.params;
-    //     const result = await Users.delete({
-    //         where:{id},
-    //     });
-    //     res.status(200).json(result)
-    // }catch (error){
-    //     res.status(400).json(error.message)
-    // }
+const deleteUser = async(req, res)=>{
+    try{
+        const {id} = req.params;
+        const result = await Users.destroy({where: {id}});
+        res.status(200).json(result)
+    }catch (error){
+        res.status(400).json(error.message)
+    }
 }
 
 module.exports = {
@@ -72,6 +69,7 @@ module.exports = {
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUserWithTasks,
 }
 

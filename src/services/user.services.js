@@ -1,16 +1,15 @@
-const { getAllUsers } = require('../controllers/users.controller');
-const Users = require('../models/users.models');
+// const { getAllUsers } = require('../controllers/users.controller');
+const Users = require('../models/users.models');//asi nos comunicamos con la carptea de modelos
 const Todos = require('../models/todos.models');
 
 
 class UserServices {
-
-    static async getAll(){
+    static async getAll(){//metodos staticos
         try{
             const result = await Users.findAll();
             return result;
         }catch(error){
-            throw new error;
+            throw new error();
         }
     }
 
@@ -27,9 +26,18 @@ class UserServices {
         try {
           const result = await Users.findOne({
             where: { id },
-            include: {
+            // attributes:["username", "email"],//son los atributos que quiero que me traiga de usuarios
+            //omite toda la informacion del usuario y me trae el ToDo
+            attributes: {
+              exclude:["password"],
+            },
+            include: {//le digo que en la busqueda me incluya la tabla de todos, este include pertenece a la tabla de ToDos
               model: Todos,
+              attributes:["title"],
               as: "task",
+              // include: {
+
+              // },//se peude hacer otro include, si se necesita
             },
           });
           return result;
@@ -37,33 +45,32 @@ class UserServices {
           throw error;
         }
       }
-    
+    //creando un usuario
       static async create(user){
         try{
-            const result = Users.create(user);
-            return result;
+          const result = await Users.create(user);
+          return result
         }catch(error){
-            throw error;
+          throw error;
         }
       }
-
-      static async update(id){
+//actualizando usuarios
+      static async update(field, id){
         try {
-            const result = Users.update({where:{id}});
+            const result = Users.update(field, {where:{id}});
             return result;
         }catch(error){
             throw error;
         }
       }
-
-    //   static async delete(id){
-    //     try{
-    //         const result = Users.delete(id);
-    //         return result;
-    //     }catch(error){
-    //         throw error;
-    //     }
-    //   }
+      //elinando usuarios
+      static async delete(id){
+        try{
+            const result = Users.destroy({where:{id}});
+            return result;
+        }catch(error){
+            throw error;
+        }
+      }
 }
-
 module.exports = UserServices;

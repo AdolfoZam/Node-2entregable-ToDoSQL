@@ -3,6 +3,7 @@ const Users = require('../models/users.models');
 const Todos = require('../models/todos.models');
 const Categories = require('../models/categories.models');
 const TodosCategories = require('../models/todos-categories.models');
+
 const users = [
     {username:"adolfo", email:"adolfo@gmail.com", password:"1234"},
     {username:"lucero", email:"lucero@gmail.com", password:"1234"},
@@ -43,7 +44,7 @@ const todosCategories = [
     {categoryId: 3, todoId:4},
 ];
 //metodos create, findOne, find All,findByPk, update, destroy
-db.sync({force: false})
+db.sync({force: true})
     .then(()=>{
         console.log("iniciando con el sembrado");
             users.forEach((user)=> Users.create(user)); 
@@ -52,10 +53,10 @@ db.sync({force: false})
             },100);
             setTimeout(()=>{
                 categories.forEach((category)=>Categories.create(category));
-            },200);
+            },250);
             setTimeout(()=>{
-                todosCategories.forEach((tc)=> Categories.create(tc));
-            },300);
+                todosCategories.forEach((tc)=> TodosCategories.create(tc));
+            },400);
     })
     .catch((error)=>console.log(error));
 

@@ -5,7 +5,7 @@ const {
     createUser,
     updateUser,
     deleteUser,
-    getWithTasks
+    getUserWithTasks,
 } = require('../controllers/users.controller');
 
 const router = Router();
@@ -16,7 +16,7 @@ router.get('/users', getAllUsers);//el segundo parametro es una funcion, toda la
 router.get('/users/:id', getUserById);
 
 //obtener a un usuario con sus tareas
-// router.get('/users/:id/tasks',getUserWithTasks);//esto es un endpoint
+router.get('/users/:id/todos', getUserWithTasks);//esto es un endpoint
 
 router.post('/users', createUser);
 

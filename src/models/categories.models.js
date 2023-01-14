@@ -8,12 +8,18 @@ const Categories = db.define('categories', {
         autoIncrement:true,
         allowNull:false,
         unique:true,
+        
     },
     name:{
         type: DataTypes.STRING,
         allowNull:false,
         unique:true,
     },
+
+    user_id:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+    }
 },
 {
     timestamps:false
