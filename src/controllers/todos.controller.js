@@ -68,7 +68,7 @@ const deleteTodos = async(req, res)=>{
           const { id } = req.params;//aca nos envian el id de la peticion
           const result = await TodosServices.getWithCategories(id);
           res.json({
-            message: "Enviando tareas con categorias",
+            message: "Enviando tareas con categorias actualizadas",
             data: result,
           });
         } catch (error) {

@@ -13,7 +13,7 @@ const userLogin = async (req, res) => {
         id: response.result.id,
       };
       // firmamos un nuevo token
-      const token = jwt.sign(data, "shalala shalala", { algorithm: "HS512" });
+      const token = jwt.sign(data, "zaid0504", { algorithm: "HS512" });
       data.token = token;
       console.log(data);
       res.json(data);
