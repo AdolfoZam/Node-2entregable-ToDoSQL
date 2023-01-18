@@ -10,7 +10,7 @@ const db = new Sequelize({
     password: process.env.DB_PASSWORD,//pones tu contraseña
     dialect:"postgres",//la base de datos que estamos utilizando 
     logging:false,
-    // dialectOptions: { ssl: { require: true, rejectUnauthorized: false}},
+    dialectOptions: { ssl: { require: true, rejectUnauthorized: false}},
 });//esta ultima linea se debe quitar para correr el proyecto local
 module.exports = db;
 
