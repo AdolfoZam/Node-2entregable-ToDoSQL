@@ -9,22 +9,24 @@ const {
     
 } = require('../controllers/todos.controller');
 
+const authMiddleware = require('../middlwares/auth.middlewares');
+
 const router = Router();
 //localhost:8000/todos
 //vamos a tener nuestra rutas de los contraoladores
-router.get('/todos', getAllTodos);
+router.get('/todos', authMiddleware, getAllTodos);
 
-router.get('/todos/:id', getTodosById);
+router.get('/todos/:id', authMiddleware, getTodosById);
 
-router.get('/todos/:id/categories', getTodosWithCategories);
+router.get('/todos/:id/categories', authMiddleware, getTodosWithCategories);
 
 //hacer un endpoint con tareas con las categorias, pertenecen a un usuario por su id
 
-router.post('/todos', createTodos);
+router.post('/todos', authMiddleware, createTodos);
 
-router.put('/todos/:id',updateTodos);
+router.put('/todos/:id', authMiddleware, updateTodos);
 
-router.delete('/todos/:id', deleteTodos);
+router.delete('/todos/:id', authMiddleware, deleteTodos);
 
 module.exports = router;
 

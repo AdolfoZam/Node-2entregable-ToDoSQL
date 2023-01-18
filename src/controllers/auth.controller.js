@@ -12,20 +12,20 @@ const userLogin = async (req, res) => {
         username: response.result.username,
         id: response.result.id,
       };
-      // firmamos un nuevo token
-      const token = jwt.sign(data, "zaid0504", { algorithm: "HS512" });
+      // firmamos un nuevo token, con la palabra secreta zaid
+      const token = jwt.sign(data, 'zaid', { algorithm: "HS512", expiresIn:"1m"})
       data.token = token;
-      console.log(data);
+      // console.log(token);//con este console valido que estoy guardando el token en la data
       res.json(data);
-    }else{
-        res.status(401).json({message:"creadenciales invalidas"})
-    }
-  } catch (error) {
-    res.status(400).json(error.message);
+  } else{
+    res.status(401).json({message: "credenciales invalidas"});
   }
-};
-
+  } catch (error) {
+    res.status(400).json(error.message)
+}
+}
 module.exports = {
-  userLogin,
-};
+  userLogin
+}
+
 

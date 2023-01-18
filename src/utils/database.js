@@ -8,7 +8,8 @@ const db = new Sequelize({
     port:"5432",
     password:"ruta",//pones tu contraseña
     dialect:"postgres",//la base de datos que estamos utilizando 
-    logging:false
-});
+    logging:false,
+    // dialectOptions: { ssl: { require: true, rejectUnauthorized: false}},
+});//esta ultima linea se debe quitar para correr el proyecto local
 module.exports = db;
 

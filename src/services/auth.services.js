@@ -4,7 +4,7 @@ class AuthService {
     static async login(email, password){
         try{
     const result = await Users.findOne({
-        where: {email}
+        where: {email},
     });
     if(result){
         return password === result.password 

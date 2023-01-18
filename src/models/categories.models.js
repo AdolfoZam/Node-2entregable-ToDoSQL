@@ -16,11 +16,7 @@ const Categories = db.define('categories', {
         unique:true,
     },
 
-    user_id:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-    }
-},
+  },
 {
     timestamps:false
 });
